@@ -1,0 +1,6 @@
+.newGame {
+  display: flex;
+  flex-direction: column; 
+  padding: 40px;
+  gap: 12px;
+}

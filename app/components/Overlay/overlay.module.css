@@ -1,0 +1,10 @@
+.overlay {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+}
+
+.svgcontainer {
+  width: 100vw;
+  height: 100vh;
+}

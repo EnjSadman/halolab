@@ -1,9 +1,11 @@
-import { DataFetcher } from '@/app/lib/DataFetcher';
 import { requestStatus } from '@/app/utils/enums';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 
 const initialState = {
   userId: null,
+  username : "",
+  difficulty: 0,
   status: requestStatus.idle,
 };
 
@@ -11,15 +13,14 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    fetchDataSuccess: (state, action) => {
-      state.userId = action.payload;
-      state.status = requestStatus.succeeded;
-    },
-    fetchDataFailure: (state) => {
-      state.status = requestStatus.failed;
-    }
+    setUsername:((state, action : PayloadAction<string>) => {
+      state.username = action.payload;
+    }),
+    setDifficulty:((state, action : PayloadAction<number>) => {
+      state.difficulty = action.payload;
+    })
   },
-  extraReducers(builder) {
+  extraReducers: (builder) => {
     builder
       .addCase(fetchUserId.pending, (state, action) => {
         state.status = requestStatus.loading;
@@ -34,14 +35,25 @@ const userSlice = createSlice({
   }
 });
 
-export const { fetchDataSuccess, fetchDataFailure } = userSlice.actions;
 export default userSlice.reducer;
+export const {setDifficulty, setUsername} = userSlice.actions
 
-export const fetchUserId = createAsyncThunk("userId", async () => {
-  //const savedUser = 
+export const fetchUserId = createAsyncThunk("userId/fetchId", async ({name, complexity} : {name: string, complexity: number}) => {
+
+  const user = {
+    name: name,
+    complexity:complexity,
+  }
+
   try {
-    const response = await DataFetcher();
-    return response?.json();
+    const result = await fetch (`https://cave-drone-server.shtoa.xyz/init`, {        
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user)
+    });
+    return (await result.json()).id;
   } catch (error) {
     return error
   }

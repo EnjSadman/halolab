@@ -1,12 +1,15 @@
 import StoreProvider from "./store/storeProvider"
+import { DialogWindow } from "./components/DialogWindow/DialogWindow";
+import { Main } from "./components/Main/Main";
 
 export default function Home() {
   
   return (
     <StoreProvider>
-      <div>
-        123
-      </div>
+        <DialogWindow />
+        <Main />
     </StoreProvider> 
   );
 }
+//<Overlay />
+//<Comp />

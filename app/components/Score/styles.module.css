@@ -1,0 +1,12 @@
+.singleScore {
+  display: flex;
+  justify-content: space-between;
+}
+
+.scoreboard {
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+  padding: 40px;
+}
