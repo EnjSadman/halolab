@@ -112,8 +112,6 @@ export function Overlay () {
         x4: Number(coords[1][chunksPassed + 1]),
       }
 
-      console.log(refPositionX.current + 500, refPositionY.current)
-      //console.log(positionX + 500, positionY + 500, Number(coords[0][chunksPassed]) + 500, Number(coords[1][chunksPassed]) + 500)
       if (walls.leftWall1 == refPositionX.current + 500 - droneSize
           || walls.rightWall1 == refPositionX.current + 500 + droneSize
       ) {
@@ -121,122 +119,6 @@ export function Overlay () {
         dispatch(setVerticalSpeed(0));
         console.log("collision")
       }
-
-      // if (walls.leftWall1 < 0 && walls.rightWall1 > 0) {
-      //   if (positionX + droneSize === walls.rightWall1
-      //   || positionX - droneSize === walls.leftWall1) {
-      //     console.log("collision");
-      //     dispatch(setHorizontalSpeed(0));
-      //     dispatch(setVerticalSpeed(0));
-      //   } 
-      // } else if (walls.leftWall1 < 0 && walls.rightWall1 < 0) {
-      //   if (-(positionX + droneSize) === walls.leftWall1
-      //     || -(positionX - droneSize) === walls.rightWall1) {
-      //       console.log("collision");
-      //       dispatch(setHorizontalSpeed(0));
-      //       dispatch(setVerticalSpeed(0));
-      //     }
-      // } else if (walls.leftWall1 > 0 && walls.rightWall1 > 0) {
-      //   if (-(positionX + droneSize) === walls.leftWall1
-      //   || -(positionX - droneSize) === walls.rightWall1) {
-      //     console.log("collision");
-      //     dispatch(setHorizontalSpeed(0));
-      //     dispatch(setVerticalSpeed(0));
-      //   }
-      // } else if (walls.leftWall1 > 0 && walls.rightWall1 > 0) {
-        
-      // }
-      
-
-      // const dronePosition = [
-      //   {
-      //     x: (500 - droneSize + positionX),
-      //     y: (-positionY)
-      //   },
-      //   {
-      //     x: (500 + droneSize + positionX),
-      //     y: (-positionY)
-      //   },
-      //   {
-      //     x: (500 - droneSize + positionX),
-      //     y: (-positionY) + droneSize
-      //   },
-      //   {
-      //     x: (500 + droneSize + positionX),
-      //     y: (-positionY) + droneSize
-      //   }
-      // ]
-
-      
-      //   const leftWallFirst = {
-      //     x1: 500 + Number(coords[0][chunksPassed]),
-      //     x2: 500 + Number(coords[0][chunksPassed]),
-      //     y1: chunksPassed * chunkSize,
-      //     y2: (chunksPassed + 1) * chunkSize,
-      //   }
-      //   const rightWallFirst = {
-      //     x1: 500 + Number(coords[1][chunksPassed]),
-      //     x2: 500 + Number(coords[1][chunksPassed]),
-      //     y1: chunksPassed * chunkSize,
-      //     y2: (chunksPassed + 1) * chunkSize,
-      //   }
-      //   const leftWallSecond = {
-      //     x1: 500 + Number(coords[0][chunksPassed + 1]),
-      //     x2: Number(coords[0][chunksPassed + 1]),
-      //     y1: (chunksPassed + 1) * chunkSize,
-      //     y2: (chunksPassed + 2) * chunkSize,
-      //   }
-      //   const rightWallSecond = {
-      //     x1: 500 + Number(coords[1][chunksPassed + 1]),
-      //     x2: 500 + Number(coords[1][chunksPassed + 1]),
-      //     y1: (chunksPassed + 1) * chunkSize,
-      //     y2: (chunksPassed + 1) * chunkSize,
-      //   }
-
-      //   if (((-positionY) + droneSize) < leftWallSecond.y1) {
-      //     console.log(leftWallFirst.x1)
-      //     console.log(rightWallFirst.x1)
-      //     console.log(dronePosition)
-      //     if (dronePosition[0].x === leftWallFirst.x1 || dronePosition[1].x === rightWallFirst.x1) {
-      //       dispatch(setVerticalSpeed(0));
-      //       dispatch(setHorizontalSpeed(0));
-      //     }
-      //   } else {
-      //     if (
-      //       dronePosition[0].x === leftWallFirst.x1 
-      //       || dronePosition[1].x === rightWallFirst.x1
-      //       || dronePosition[2].x === leftWallSecond.x1
-      //       || dronePosition[3].x === rightWallSecond.x1
-      //     ) {
-      //       dispatch(setVerticalSpeed(0));
-      //       dispatch(setHorizontalSpeed(0));
-      //     }
-        
-      // } else {
-      //   const leftWallFirst = {
-      //     x1: 500 + Number(coords[0][chunksPassed]),
-      //     x2: 500 + Number(coords[1][chunksPassed]),
-      //     y1: chunkSize * chunksPassed,
-      //     y2: chunkSize * chunksPassed,
-      //   }
-      //   const rightWallFirst = {
-      //     x1: 500 + Number(coords[1][chunksPassed]),
-      //     x2: 500 + Number(coords[1][chunksPassed]),
-      //     y1: 0,
-      //     y2: chunkSize
-      //   }
-      //   const leftWallSecond = {
-      //     x1: 500 + Number(coords[0][1]),
-      //     x2: Number(coords[0][1]),
-      //     y1: chunkSize,
-      //     y2: chunkSize * 2,
-      //   }
-      //   const rightWallSecond = {
-      //     x1: 500 + Number(coords[1][1]),
-      //     x2: 500 + Number(coords[1][1]),
-      //     y1: chunkSize,
-      //     y2: chunkSize * 2,
-      //   }
       
     }
   }, [positionX, positionY])
