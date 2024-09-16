@@ -22,14 +22,14 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchUserId.pending, (state, action) => {
+      .addCase(fetchUserId.pending, (state) => {
         state.status = requestStatus.loading;
       })
       .addCase(fetchUserId.fulfilled, (state, action) => {
         state.status = requestStatus.succeeded;
         state.userId = action.payload;
       })
-      .addCase(fetchUserId.rejected, (state, action) => {
+      .addCase(fetchUserId.rejected, (state) => {
         state.status = requestStatus.failed;
       })
   }

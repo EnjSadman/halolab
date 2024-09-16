@@ -19,8 +19,8 @@ export function CaveLayout() {
   const svgRef = useRef<SVGSVGElement>(null);
 
   const setCoordinates = (arr : string[]) => {
-    let firstPoint = Number(arr[0]);
-    let secondPoint = Number(arr[1]);
+    const firstPoint = Number(arr[0]);
+    const secondPoint = Number(arr[1]);
 
     const result = [500 + firstPoint, 500 + secondPoint];
 

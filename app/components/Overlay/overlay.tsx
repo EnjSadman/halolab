@@ -19,7 +19,7 @@ export function Overlay () {
   const refInGameTime = useRef(inGameTime);
 
   const droneSize = 5;
-  let interval : any;
+  let interval : NodeJS.Timeout;
 
   function timeDisplay(ms : number) {
     const result : string[] = [];
@@ -48,7 +48,7 @@ export function Overlay () {
 
   useEffect(() => {
     refHorizontal.current = horizontalSpeed;
-    let horizontalMovement : any;
+    let horizontalMovement : NodeJS.Timeout;
 
     if (caveReady) {
       horizontalMovement = setInterval(() => {
@@ -71,7 +71,7 @@ export function Overlay () {
 
   useEffect(() => {
     refVertical.current = verticalSpeed;
-    let verticalMovement : any;
+    let verticalMovement : NodeJS.Timeout;
 
     if (caveReady) {
       verticalMovement = setInterval(() => {

@@ -2,7 +2,7 @@
 
 import { setDifficulty, setUsername } from "@/app/store/slices/UserSlice/UserSlice";
 import styles from "./styles.module.css";
-import { setDialogContentType, setDialogVisibility } from "@/app/store/slices/MiscSlice/Misc";
+import { setDialogVisibility } from "@/app/store/slices/MiscSlice/Misc";
 import { Button, FormControl, Input } from "@mui/material"
 import { useState } from "react";
 import { useDispatch } from "react-redux";
