@@ -4,7 +4,6 @@ import { AppDispatch, RootState } from "@/app/store/store";
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { LoadingScreen } from "../LoadingScreen/LoadingScreen";
-import { GameScreen } from "../GameScreen/GameScreen";
 import { fetchUserId, setDifficulty, setUsername } from "@/app/store/slices/UserSlice/UserSlice";
 import { setCaveId } from "@/app/store/slices/CaveSlice/CaveSlice";
 import { CaveLayout } from "../CaveLayout/CaveLayout";
@@ -49,9 +48,9 @@ export function Main() {
   return(
     <div>
       {
-        //(!cave.caveReady)
-        //? <LoadingScreen />
-        //: null
+        (!cave.caveReady)
+        ? <LoadingScreen />
+        : null
       }
 
       {
