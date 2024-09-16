@@ -188,11 +188,21 @@ export function Overlay () {
           <div style={{"transform": `rotate(${9 * horizontalSpeed}deg)`}} className={styles.speedArrow}></div>
           <div className={styles.redDot}></div>
         </div>
-        Horizontal - {horizontalSpeed}
-        Vertical - {verticalSpeed}
-        Time - {timeDisplay(inGameTime)}
-        Chunks Passed - {chunksPassed}
-        Score - {gameScore}
+        <div>
+          Horizontal - {horizontalSpeed}
+        </div>
+        <div>
+          Vertical - {verticalSpeed}
+        </div>
+        <div>
+          Time - {timeDisplay(inGameTime)}
+        </div>
+        <div>
+          Chunks Passed - {chunksPassed}
+        </div>
+        <div>
+          Score - {gameScore}
+        </div>
       </div>
       <svg className={styles.svgcontainer}>
         <polygon points={`${500 - droneSize},0 500,${droneSize} ${ 500 + (droneSize)},0` }fill='lime' />

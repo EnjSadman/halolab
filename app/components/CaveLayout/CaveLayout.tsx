@@ -63,7 +63,6 @@ export function CaveLayout() {
           } else {
             const poly = document.createElementNS(svgNamespace, "polygon");
             svgRef.current.setAttribute('height', `${count + defaultChunkHeight - difficulty}px`);
-            // poly.setAttribute("points", `${prevData[1]},${count} ${prevData[0]},${count}  ${points[0]},${count + defaultChunkHeight - difficulty} ${points[1]},${count + defaultChunkHeight - difficulty}`);
             poly.setAttribute("points", `${points[1]},${count} ${points[0]},${count}  ${points[0]},${count + defaultChunkHeight - difficulty} ${points[1]},${count + defaultChunkHeight - difficulty}`);
             poly.setAttribute("fill", "white");
             svgRef.current.appendChild(poly);
@@ -95,11 +94,8 @@ export function CaveLayout() {
       <svg
         style={{"top": `${-positionY}px`, "left": `${positionX}px`}}
         ref={svgRef}
-        className={styles.caveSvg}
-        
-      >
-        <rect x="499" width="1px" height="100%" fill="red"/>
-      </svg>
+        className={styles.caveSvg} 
+      />
     </div>
   )
 }
