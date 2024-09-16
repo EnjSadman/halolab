@@ -8,7 +8,10 @@ import { addCoords, setCaveReady } from "@/app/store/slices/CaveSlice/CaveSlice"
 import { setChunkSize } from "@/app/store/slices/GameSessionSlice/GameSessionSlice";
 
 export function CaveLayout() {
+  const defaultChunkHeight = 25;
+
   const dispatch = useDispatch();
+
   const { caveId } = useSelector((state : RootState) => state.caveReducer);
   const { userId, difficulty } = useSelector((state : RootState) => state.userReducer);
   const { positionX, positionY } = useSelector((state : RootState) => state.gameSessionReducer);
@@ -46,29 +49,30 @@ export function CaveLayout() {
             svgRef.current.setAttribute('height', '0px');
 
             const poly = document.createElementNS(svgNamespace, "polygon")
-            poly.setAttribute("points", `${points[1]},${count} ${points[0]},${count}  ${points[0]},${count + 20 - difficulty} ${points[1]},${count + 20 - difficulty}`);
+            poly.setAttribute("points", `${points[1]},${count} ${points[0]},${count}  ${points[0]},${count + defaultChunkHeight - difficulty} ${points[1]},${count + defaultChunkHeight - difficulty}`);
             poly.setAttribute("fill", "white");
     
             svgRef.current.appendChild(poly);
             prevData[0] = points[0];
             prevData[1] = points[1];
 
-            count += 20 - difficulty;
+            count += defaultChunkHeight - difficulty;
 
-            dispatch(setChunkSize(20 - difficulty));
-            dispatch(addCoords(message.split(",")))
+            dispatch(setChunkSize(defaultChunkHeight - difficulty));
+            dispatch(addCoords(setCoordinates(message.split(","))))
           } else {
             const poly = document.createElementNS(svgNamespace, "polygon");
-            svgRef.current.setAttribute('height', `${count + 20 - difficulty}px`);
-            poly.setAttribute("points", `${prevData[1]},${count} ${prevData[0]},${count}  ${points[0]},${count + 20 - difficulty} ${points[1]},${count + 20 - difficulty}`);
+            svgRef.current.setAttribute('height', `${count + defaultChunkHeight - difficulty}px`);
+            // poly.setAttribute("points", `${prevData[1]},${count} ${prevData[0]},${count}  ${points[0]},${count + defaultChunkHeight - difficulty} ${points[1]},${count + defaultChunkHeight - difficulty}`);
+            poly.setAttribute("points", `${points[1]},${count} ${points[0]},${count}  ${points[0]},${count + defaultChunkHeight - difficulty} ${points[1]},${count + defaultChunkHeight - difficulty}`);
             poly.setAttribute("fill", "white");
             svgRef.current.appendChild(poly);
             prevData[0] = points[0];
             prevData[1] = points[1];
-            count += 20 - difficulty;
+            count += defaultChunkHeight - difficulty;
 
             if (message !== "finished") {
-              dispatch(addCoords(message.split(",")))
+              dispatch(addCoords(setCoordinates(message.split(","))))
             }
           }
         }
@@ -89,10 +93,13 @@ export function CaveLayout() {
   return(
     <div className={styles.caveContainer}>
       <svg
-        style={{"top": `${positionY}px`, "left": `${positionX}px`}}
+        style={{"top": `${-positionY}px`, "left": `${positionX}px`}}
         ref={svgRef}
         className={styles.caveSvg}
-      />
+        
+      >
+        <rect x="499" width="1px" height="100%" fill="red"/>
+      </svg>
     </div>
   )
 }

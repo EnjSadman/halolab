@@ -32,11 +32,14 @@ const gameSessionSlice = createSlice({
     setVerticalSpeed:((state, action : PayloadAction<number>) => {
       state.verticalSpeed = action.payload
     }),
-    setPositionX:((state, action : PayloadAction<number>) => {
-      state.positionX = state.positionX + action.payload
+    incrementPositionX:((state) => {
+      state.positionX = state.positionX + 1
     }),
-    setPositionY:((state, action : PayloadAction<number>) => {
-      state.positionY = state.positionY + action.payload
+    decrementPositionX:((state) => {
+      state.positionX = state.positionX - 1
+    }),
+    incrementPositionY:((state) => {
+      state.positionY = state.positionY + 1
     }),
     setGameScore:((state, action : PayloadAction<number>) => {
       state.gameScore = action.payload;
@@ -55,4 +58,4 @@ const gameSessionSlice = createSlice({
 
 export default gameSessionSlice.reducer
 
-export const { setHorizontalSpeed, setVerticalSpeed, setPositionX, setPositionY, setGameScore, setInGametime, setChunkSize, setChunksPassed } = gameSessionSlice.actions
+export const { setHorizontalSpeed, setVerticalSpeed, incrementPositionX, decrementPositionX, incrementPositionY, setGameScore, setInGametime, setChunkSize, setChunksPassed } = gameSessionSlice.actions

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface initialState {
-  coords: string[][];
+  coords: number[][];
   caveReady: boolean;
   caveId: string;
 }
@@ -16,7 +16,7 @@ const caveSlice = createSlice({
   name: "cave",
   initialState,
   reducers: {
-    addCoords: ((state, action: PayloadAction<string[]>) => {
+    addCoords: ((state, action: PayloadAction<number[]>) => {
       state.coords = [[...state.coords[0], action.payload[0]], [...state.coords[1], action.payload[1]]];
     }),
     setCaveReady:((state, action: PayloadAction<boolean>) => {
