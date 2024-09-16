@@ -6,13 +6,18 @@ import { AppDispatch } from "@/app/store/store";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux"
 
+interface caveResponse {
+  no: number,
+  chunkId: string, 
+}
+
 export default function Comp() {
   const dispatch = useDispatch<AppDispatch>();
   const select = useAppSelector(state => state.userReducer);
   const userId = select.userId;
   const containerRef = useRef<HTMLDivElement>(null);
   const wsRef = useRef<WebSocket | null>(null);
-  const svgRef = useRef<SVGSVGElement>(null)
+  const svgRef = useRef<SVGSVGElement>(null);
   const [finalString, setFinalString] = useState("");
 
   const setCoordinates = (arr : string[]) => {
@@ -33,7 +38,6 @@ export default function Comp() {
       const prevData : number[] = [];
 
       wsRef.current.onopen = () => {
-        console.log("WebSocket connection opened");
         const initMessage = `player:${userId}-${id}`;
         wsRef.current?.send(initMessage)
       };
@@ -76,7 +80,6 @@ export default function Comp() {
       };
 
       wsRef.current.onclose = () => {
-        console.log("WebSocket connection closed");
         wsRef.current = null;
       };
     }

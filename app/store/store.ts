@@ -2,13 +2,16 @@ import { configureStore } from '@reduxjs/toolkit'
 import  userReducer from './slices/UserSlice/UserSlice';
 import  caveReducer from './slices/CaveSlice/CaveSlice';
 import  miscReducer from './slices/MiscSlice/Misc';
+import  gameSessionReducer from './slices/GameSessionSlice/GameSessionSlice';
+
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       userReducer,
       caveReducer,
-      miscReducer
+      miscReducer,
+      gameSessionReducer,
     }
   })
 }
