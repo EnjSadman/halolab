@@ -3,6 +3,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 interface initial {
   horizontalSpeed: number,
   verticalSpeed: number,
+  positionX: number,
+  positionY: number,
   gameScore: number,
   inGameTime: number,
 }
@@ -10,6 +12,8 @@ interface initial {
 const initialState : initial = {
   horizontalSpeed: 0,
   verticalSpeed: 0,
+  positionX: 0,
+  positionY: 0,
   gameScore: 0,
   inGameTime: 0,
 }
@@ -24,6 +28,12 @@ const gameSessionSlice = createSlice({
     setVerticalSpeed:((state, action : PayloadAction<number>) => {
       state.verticalSpeed = action.payload
     }),
+    setPositionX:((state, action : PayloadAction<number>) => {
+      state.positionX = state.positionX + action.payload
+    }),
+    setPositionY:((state, action : PayloadAction<number>) => {
+      state.positionY = state.positionY + action.payload
+    }),
     setGameScore:((state, action : PayloadAction<number>) => {
       state.gameScore = action.payload;
     }),
@@ -35,4 +45,4 @@ const gameSessionSlice = createSlice({
 
 export default gameSessionSlice.reducer
 
-export const { setHorizontalSpeed, setVerticalSpeed, setGameScore, setInGametime } = gameSessionSlice.actions
+export const { setHorizontalSpeed, setVerticalSpeed, setPositionX, setPositionY, setGameScore, setInGametime } = gameSessionSlice.actions

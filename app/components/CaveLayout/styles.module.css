@@ -1,3 +1,9 @@
+.caveContainer {
+  max-height: 100vh;
+}
+
 .caveSvg {
   position: relative;
+
+  transition: all 0.1s;
 }

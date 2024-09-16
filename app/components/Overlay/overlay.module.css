@@ -10,3 +10,45 @@
   width: 100vw;
   height: 100vh;
 }
+
+.info {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.speedBackground {
+  width: 200px;
+  height: 100px;
+
+  position: relative;
+
+  display: flex;
+
+  justify-content: center;
+
+  background-color: white;
+
+  border-radius: 100% 100% 0 0;
+}
+
+.redDot {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background-color: red;
+
+  justify-content: center;
+
+  border-radius: 100% 100% 0 0; 
+
+  bottom: 0px;
+}
+
+.speedArrow {
+  width: 10px;
+  height: 190px;
+  background-image: linear-gradient(to bottom, red 50%, rgba(0, 0, 0, 0) 50%);
+
+  transition: all 0.5s linear;
+}

@@ -8,7 +8,7 @@ import { GameScreen } from "../GameScreen/GameScreen";
 import { fetchUserId, setDifficulty, setUsername } from "@/app/store/slices/UserSlice/UserSlice";
 import { setCaveId } from "@/app/store/slices/CaveSlice/CaveSlice";
 import { CaveLayout } from "../CaveLayout/CaveLayout";
-import { Overlay } from "../Overlay/overlay";
+import { Overlay } from "../Overlay/Overlay";
 
 export function Main() {
   const dispatch = useDispatch<AppDispatch>();

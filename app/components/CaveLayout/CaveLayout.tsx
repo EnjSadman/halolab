@@ -10,6 +10,7 @@ export function CaveLayout() {
   const dispatch = useDispatch();
   const { caveId } = useSelector((state : RootState) => state.caveReducer);
   const { userId, difficulty } = useSelector((state : RootState) => state.userReducer);
+  const { positionX, positionY } = useSelector((state : RootState) => state.gameSessionReducer);
   const wsRef = useRef<WebSocket | null>(null);
   const svgRef = useRef<SVGSVGElement>(null);
 
@@ -44,7 +45,7 @@ export function CaveLayout() {
         if (svgRef.current) {
           if (count === 0) {
             svgRef.current.setAttribute('width', '100vw');
-            svgRef.current.setAttribute('height', '10000vh');
+            svgRef.current.setAttribute('height', '0px');
 
             const poly = document.createElementNS(svgNamespace, "polygon")
             poly.setAttribute("points", `${points[1]},${count} ${points[0]},${count}  ${points[0]},${count + 20 - difficulty} ${points[1]},${count + 20 - difficulty}`);
@@ -56,6 +57,7 @@ export function CaveLayout() {
             count += 20 - difficulty;
           } else {
             const poly = document.createElementNS(svgNamespace, "polygon");
+            svgRef.current.setAttribute('height', `${count + 20 - difficulty}px`);
             poly.setAttribute("points", `${prevData[1]},${count} ${prevData[0]},${count}  ${points[0]},${count + 20 - difficulty} ${points[1]},${count + 20 - difficulty}`);
             poly.setAttribute("fill", "white");
             svgRef.current.appendChild(poly);
@@ -79,9 +81,10 @@ export function CaveLayout() {
     }
   }, [caveId])
   return(
-    <div>
+    <div className={styles.caveContainer}>
       <svg
-        style={{"top": `0px`}} ref={svgRef}
+        style={{"top": `${positionY}px`, "left": `${positionX}px`}}
+        ref={svgRef}
         className={styles.caveSvg}
       />
     </div>
