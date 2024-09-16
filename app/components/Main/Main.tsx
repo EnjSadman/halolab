@@ -7,7 +7,7 @@ import { LoadingScreen } from "../LoadingScreen/LoadingScreen";
 import { fetchUserId, setDifficulty, setUsername } from "@/app/store/slices/UserSlice/UserSlice";
 import { setCaveId } from "@/app/store/slices/CaveSlice/CaveSlice";
 import { CaveLayout } from "../CaveLayout/CaveLayout";
-import { Overlay } from "../Overlay/Overlay";
+import { Overlay } from "../Overlay/overlay";
 
 export function Main() {
   const dispatch = useDispatch<AppDispatch>();
