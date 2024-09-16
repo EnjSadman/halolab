@@ -4,7 +4,8 @@ import styles from "./styles.module.css";
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/store/store";
-import { setCaveReady } from "@/app/store/slices/CaveSlice/CaveSlice";
+import { addCoords, setCaveReady } from "@/app/store/slices/CaveSlice/CaveSlice";
+import { setChunkSize } from "@/app/store/slices/GameSessionSlice/GameSessionSlice";
 
 export function CaveLayout() {
   const dispatch = useDispatch();
@@ -17,8 +18,6 @@ export function CaveLayout() {
   const setCoordinates = (arr : string[]) => {
     let firstPoint = Number(arr[0]);
     let secondPoint = Number(arr[1]);
-
-    console.log(firstPoint, secondPoint)
 
     const result = [500 + firstPoint, 500 + secondPoint];
 
@@ -38,7 +37,6 @@ export function CaveLayout() {
 
       wsRef.current.onmessage = event => {
         const message = event.data;
-        console.log(message.split(","));
         const points = setCoordinates(message.split(","));
 
         const svgNamespace = 'http://www.w3.org/2000/svg';
@@ -54,7 +52,11 @@ export function CaveLayout() {
             svgRef.current.appendChild(poly);
             prevData[0] = points[0];
             prevData[1] = points[1];
+
             count += 20 - difficulty;
+
+            dispatch(setChunkSize(20 - difficulty));
+            dispatch(addCoords(message.split(",")))
           } else {
             const poly = document.createElementNS(svgNamespace, "polygon");
             svgRef.current.setAttribute('height', `${count + 20 - difficulty}px`);
@@ -64,6 +66,10 @@ export function CaveLayout() {
             prevData[0] = points[0];
             prevData[1] = points[1];
             count += 20 - difficulty;
+
+            if (message !== "finished") {
+              dispatch(addCoords(message.split(",")))
+            }
           }
         }
       };

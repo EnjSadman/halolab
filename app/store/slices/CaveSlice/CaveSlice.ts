@@ -7,7 +7,7 @@ interface initialState {
 }
 
 const initialState : initialState = {
-  coords: [],
+  coords: [[],[]],
   caveReady: false,
   caveId: "",
 }

@@ -7,6 +7,8 @@ interface initial {
   positionY: number,
   gameScore: number,
   inGameTime: number,
+  chunkSize: number,
+  chunksPassed: number,
 }
 
 const initialState : initial = {
@@ -16,6 +18,8 @@ const initialState : initial = {
   positionY: 0,
   gameScore: 0,
   inGameTime: 0,
+  chunkSize: 0,
+  chunksPassed: 0,
 }
 
 const gameSessionSlice = createSlice({
@@ -40,9 +44,15 @@ const gameSessionSlice = createSlice({
     setInGametime:((state, action : PayloadAction<number>) => {
       state.inGameTime = action.payload;
     }),
+    setChunkSize:((state, action : PayloadAction<number>) => {
+      state.chunkSize = action.payload;
+    }),
+    setChunksPassed:((state, action : PayloadAction<number>) => {
+      state.chunksPassed = action.payload;
+    })
   }
 });
 
 export default gameSessionSlice.reducer
 
-export const { setHorizontalSpeed, setVerticalSpeed, setPositionX, setPositionY, setGameScore, setInGametime } = gameSessionSlice.actions
+export const { setHorizontalSpeed, setVerticalSpeed, setPositionX, setPositionY, setGameScore, setInGametime, setChunkSize, setChunksPassed } = gameSessionSlice.actions

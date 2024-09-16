@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import styles from './overlay.module.css'
 import { RootState } from '@/app/store/store';
 import { useEffect, useRef } from 'react';
-import { setHorizontalSpeed, setInGametime, setPositionX, setPositionY, setVerticalSpeed } from '@/app/store/slices/GameSessionSlice/GameSessionSlice';
+import { setChunksPassed, setHorizontalSpeed, setInGametime, setPositionX, setPositionY, setVerticalSpeed } from '@/app/store/slices/GameSessionSlice/GameSessionSlice';
 
 export function Overlay () {
   const dispatch = useDispatch();
 
-  const { horizontalSpeed, verticalSpeed, positionX, positionY, inGameTime, gameScore } = useSelector((state : RootState) => state.gameSessionReducer);
+  const { horizontalSpeed, verticalSpeed, positionX, positionY, inGameTime, chunkSize, chunksPassed, gameScore } = useSelector((state : RootState) => state.gameSessionReducer);
   const { caveReady } = useSelector((state : RootState) => state.caveReducer);
 
   const refVertical = useRef(verticalSpeed);
@@ -41,18 +41,21 @@ export function Overlay () {
     return result;
   }
 
+  function checkCollision () {
+    return 0;
+  }
+
   useEffect(() => {
     refInGameTime.current = inGameTime; 
   }, [inGameTime])
 
   useEffect(() => {
     refHorizontal.current = horizontalSpeed;
-    console.log(horizontalSpeed);
     let horizontalMovement : any;
 
     if (caveReady) {
       horizontalMovement = setInterval(() => {
-        dispatch(setPositionX(refPositionX.current - refHorizontal.current))
+        dispatch(setPositionX(refPositionX.current - refHorizontal.current));
       }, 10);
     }
 
@@ -76,11 +79,22 @@ export function Overlay () {
     })
   }, [verticalSpeed]);
 
+  useEffect(() => {
+    if (positionY !== 0) {
+      dispatch(setChunksPassed(Math.floor((-positionY) / chunkSize)))
+    }
+  }, [positionY]);
+
+  useEffect(() => {
+    checkCollision();
+  }, [positionX, positionY])
+
 
   useEffect(() => {
     const movementListener = (event : KeyboardEvent) => {      
       switch (event.key) {
         case ("ArrowUp"): {
+          event.preventDefault();
           if (refVertical.current < 10 && refVertical.current >= 0) {
             dispatch(setVerticalSpeed(refVertical.current + 1))
           } else if (refVertical.current < 0) {
@@ -89,6 +103,7 @@ export function Overlay () {
         break;  
         }
         case ("ArrowDown"): {
+          event.preventDefault();
           if (refVertical.current < 0 && refVertical.current > -10) {
             dispatch(setVerticalSpeed(refVertical.current + (-1)))
           } else if (refVertical.current > 0) {
@@ -141,7 +156,8 @@ export function Overlay () {
         </div>
         Horizontal - {horizontalSpeed}
         Vertical - {verticalSpeed}
-        Time - {timeDisplay(inGameTime)} 
+        Time - {timeDisplay(inGameTime)}
+        Chunks Passed - {chunksPassed}
       </div>
       <svg className={styles.svgcontainer}>
         <polygon points="495,0 500,10 505,0" fill='lime' />
